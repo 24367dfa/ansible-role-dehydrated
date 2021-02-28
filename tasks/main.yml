@@ -1,0 +1,4 @@
+---
+- include_tasks: install.yml
+- include_tasks: domains.yml
+  when: dehydrated_domains is iterable

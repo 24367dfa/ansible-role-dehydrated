@@ -1,0 +1,7 @@
+---
+- name: dehydrated register
+  command: "{{ dehydrated_binary }} --register --accept-terms"
+
+- name: dehydrated run
+  command: "{{ dehydrated_binary }} --cron"
+  when: dehydrated_force_update|default(False)|bool
