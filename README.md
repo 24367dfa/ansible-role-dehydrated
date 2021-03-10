@@ -4,6 +4,21 @@ An Ansible Role that installs [dehydrated](https://github.com/dehydrated-io/dehy
 
 ## Usage
 
+### Minimal configuration
+
+```
+vars:
+  dehydrated_contactemail: ""
+  dehydrated_accept_letsencrypt_terms: True
+  dehydrated_domains:
+    - name: "example.com"
+
+roles:
+  - role: dehydrated
+```
+
+### Full example
+
 ```yaml
 vars:
   dehydrated_version: "v0.7.0"
@@ -25,3 +40,4 @@ vars:
 roles:
   - role: dehydrated
 ```
+
