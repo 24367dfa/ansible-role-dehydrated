@@ -40,10 +40,16 @@
     state: directory
     mode: "0700"
 
+- name: Check if domains.txt is present.
+  stat:
+    path: "{{ dehydrated_config_dir }}/domains.txt"
+  register: domains_txt
+
 - name: Ensure domains.txt is present.
   file:
     path: "{{ dehydrated_config_dir }}/domains.txt"
     state: touch
+  when: domains_txt.stat.exists == False
 
 - name: Ensure config is present.
   template:
