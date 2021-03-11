@@ -8,7 +8,7 @@ An Ansible Role that installs [dehydrated](https://github.com/dehydrated-io/dehy
 
 ```yaml
 vars:
-  dehydrated_contactemail: ""
+  dehydrated_contact_email: ""
   dehydrated_accept_letsencrypt_terms: True
   dehydrated_domains:
     - name: "example.com"
@@ -22,7 +22,7 @@ roles:
 ```yaml
 vars:
   dehydrated_version: "v0.7.0"
-  dehydrated_contactemail: ""
+  dehydrated_contact_email: ""
   dehydrated_accept_letsencrypt_terms: True
   dehydrated_location: "/usr/local/share/dehydrated"
   dehydrated_binary: "/usr/local/bin/dehydrated"
