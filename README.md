@@ -6,7 +6,7 @@ An Ansible Role that installs [dehydrated](https://github.com/dehydrated-io/dehy
 
 ### Minimal configuration
 
-```
+```yaml
 vars:
   dehydrated_contactemail: ""
   dehydrated_accept_letsencrypt_terms: True
