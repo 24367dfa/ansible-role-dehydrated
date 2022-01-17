@@ -3,11 +3,12 @@
   package_facts:
     manager: "auto"
 
-- name: Ensure git and curl are installed.
+- name: Ensure dependencies are installed.
   package:
     name:
       - git
       - curl
+      - openssl
     state: present
 
 - name: Clone dehydrated repo.
