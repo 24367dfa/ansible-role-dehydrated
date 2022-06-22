@@ -9,6 +9,7 @@
   template:
     src: hook.sh.j2
     dest: "{{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
+    mode: '755'
   with_items: "{{ dehydrated_domains }}"
 
 - name: Ensure Domains are in domains.txt
