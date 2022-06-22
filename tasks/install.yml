@@ -57,3 +57,9 @@
     src: config.j2
     dest: "{{ dehydrated_config_dir }}/config"
   notify: dehydrated register
+
+- name: Ensure hook config is present.
+  template:
+    src: hook-config.j2
+    dest: "{{ dehydrated_certs_dir }}/config"
+  notify: dehydrated register
