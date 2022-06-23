@@ -12,6 +12,14 @@
     mode: '755'
   with_items: "{{ dehydrated_domains }}"
 
+- name: Add configuration to call hook scripts
+  ansible.builtin.lineinfile:
+    path: "{{ dehydrated_certs_dir }}/{{ item.name }}/config"
+    regexp: "^HOOK="
+    line: "HOOK={{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
+    create: yes
+  with_items: "{{ dehydrated_domains }}"
+
 - name: Ensure Domains are in domains.txt
   lineinfile:
     path: "{{ dehydrated_config_dir }}/domains.txt"
