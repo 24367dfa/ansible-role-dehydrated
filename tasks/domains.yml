@@ -1,12 +1,12 @@
 ---
 - name: Ensure domain directories are present.
-  file:
+  ansible.builtin.file:
     name: "{{ dehydrated_certs_dir }}/{{ item.name }}"
     state: directory
   with_items: "{{ dehydrated_domains }}"
 
 - name: Render hook script templates.
-  template:
+  ansible.builtin.template:
     src: hook.sh.j2
     dest: "{{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
     mode: '755'
@@ -21,8 +21,7 @@
   with_items: "{{ dehydrated_domains }}"
 
 - name: Ensure Domains are in domains.txt
-  lineinfile:
-    path: "{{ dehydrated_config_dir }}/domains.txt"
-    line: "{{ item.name }}{% if 'alternate_names' in item %}{% for an in item.alternate_names %} {{ an|default(omit) }}{% endfor %}{% endif %}"
-  with_items: "{{ dehydrated_domains }}"
+  ansible.builtin.template:
+    src: domains.txt.j2
+    dest: "{{ dehydrated_config_dir }}/domains.txt"
   notify: dehydrated run
