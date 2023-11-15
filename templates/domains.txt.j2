@@ -1,3 +1,10 @@
+{# Loop over each domain in the dehydrated_domains list #}
 {% for domain in dehydrated_domains %}
+{#
+  Print the domain name followed by each alternate name, separated by spaces.
+  If alternate_names is undefined, it defaults to an empty list.
+  The trim filter is used to remove any trailing whitespace.
+#}
 {{ (domain.name ~ " " ~ (domain.alternate_names | default([]) | join(' '))) | trim }}
+{# End the loop #}
 {% endfor %}
