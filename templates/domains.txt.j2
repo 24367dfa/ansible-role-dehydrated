@@ -1,2 +1,3 @@
-{% for domain in dehydrated_domains %}{{ domain.name }}{% if 'alternate_names' in domain %}{% for an in domain.alternate_names %} {{ an|default(omit) }}{% endfor %}{% endif %}
+{% for domain in dehydrated_domains %}
+{{ (domain.name ~ " " ~ (domain.alternate_names | default([]) | join(' '))) | trim }}
 {% endfor %}
