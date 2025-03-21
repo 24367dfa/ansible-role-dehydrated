@@ -1,10 +1,10 @@
 ---
 - name: Gather package facts.
-  package_facts:
+  ansible.builtin.package_facts:
     manager: "auto"
 
 - name: Ensure dependencies are installed.
-  package:
+  ansible.builtin.package:
     name:
       - git
       - curl
@@ -12,48 +12,48 @@
     state: present
 
 - name: Clone dehydrated repo.
-  git:
+  ansible.builtin.git:
     repo: 'https://github.com/dehydrated-io/dehydrated.git'
     dest: "{{ dehydrated_location }}"
     version: "{{ dehydrated_version }}"
 
 - name: Ensure dehydrated symlink is present.
-  file:
+  ansible.builtin.file:
     src: "{{ dehydrated_location }}/dehydrated"
     dest: "{{ dehydrated_binary }}"
     state: link
 
 - name: Ensure config directory is present.
-  file:
+  ansible.builtin.file:
     path: "{{ dehydrated_config_dir }}"
     state: directory
     mode: "0711"
 
 - name: Ensure wellknown directory is present.
-  file:
+  ansible.builtin.file:
     path: "{{ dehydrated_wellknown_dir }}"
     state: directory
     mode: "0755"
 
 - name: Ensure certs directory is present.
-  file:
+  ansible.builtin.file:
     path: "{{ dehydrated_certs_dir }}"
     state: directory
     mode: "0700"
 
 - name: Check if domains.txt is present.
-  stat:
+  ansible.builtin.stat:
     path: "{{ dehydrated_config_dir }}/domains.txt"
   register: domains_txt
 
 - name: Ensure domains.txt is present.
-  file:
+  ansible.builtin.file:
     path: "{{ dehydrated_config_dir }}/domains.txt"
     state: touch
   when: domains_txt.stat.exists == False
 
 - name: Ensure config is present.
-  template:
+  ansible.builtin.template:
     src: config.j2
     dest: "{{ dehydrated_config_dir }}/config"
   notify: dehydrated register
