@@ -17,7 +17,7 @@
     path: "{{ dehydrated_certs_dir }}/{{ item.name }}/config"
     regexp: "^HOOK="
     line: "HOOK={{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
-    create: yes
+    create: true
   with_items: "{{ dehydrated_domains }}"
 
 - name: Ensure Domains are in domains.txt
