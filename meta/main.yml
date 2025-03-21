@@ -1,2 +1,6 @@
 ---
+galaxy_info:
+  role_name: dehydrated
+  namespace: 24367dfa
+
 dependencies: []
