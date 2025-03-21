@@ -50,7 +50,7 @@
   ansible.builtin.file:
     path: "{{ dehydrated_config_dir }}/domains.txt"
     state: touch
-  when: domains_txt.stat.exists == False
+  when: not domains_txt.stat.exists
 
 - name: Ensure config is present.
   ansible.builtin.template:
