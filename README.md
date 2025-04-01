@@ -25,6 +25,7 @@ vars:
   dehydrated_location: "/usr/local/share/dehydrated"
   dehydrated_binary: "/usr/local/bin/dehydrated"
   dehydrated_config_dir: "/usr/local/etc/dehydrated"
+  dehydrated_base_dir: "{{ dehydrated_config_dir }}"
   dehydrated_certs_dir: "{{ dehydrated_config_dir }}/certs"
   dehydrated_wellknown_dir: "{{ dehydrated_config_dir }}/challenge"
   dehydrated_force_update: True
