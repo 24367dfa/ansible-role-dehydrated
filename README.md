@@ -41,3 +41,16 @@ roles:
   - role: dehydrated
 ```
 
+### Migrate from Debian example
+
+If you used the Debian dehydrated package before, you can migrate to
+this role while keeping your account and cert data.  To mimic the
+directory structure used by Debian, configure the role like this:
+
+```yaml
+dehydrated_contact_email: "acme@example.com"
+dehydrated_config_dir: "/etc/dehydrated"
+dehydrated_base_dir: "/var/lib/dehydrated"
+dehydrated_certs_dir: "{{ dehydrated_base_dir }}/certs"
+dehydrated_wellknown_dir: "{{ dehydrated_base_dir }}/acme-challenges"
+```
