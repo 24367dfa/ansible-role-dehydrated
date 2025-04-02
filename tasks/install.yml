@@ -29,6 +29,12 @@
     state: directory
     mode: "0711"
 
+- name: Ensure base directory is present.
+  ansible.builtin.file:
+    path: "{{ dehydrated_base_dir }}"
+    state: directory
+    mode: "0711"
+
 - name: Ensure wellknown directory is present.
   ansible.builtin.file:
     path: "{{ dehydrated_wellknown_dir }}"
