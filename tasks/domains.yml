@@ -3,13 +3,14 @@
   ansible.builtin.file:
     name: "{{ dehydrated_certs_dir }}/{{ item.name }}"
     state: directory
+    mode: '0700'
   with_items: "{{ dehydrated_domains }}"
 
 - name: Render hook script templates.
   ansible.builtin.template:
     src: hook.sh.j2
     dest: "{{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
-    mode: '755'
+    mode: '0755'
   with_items: "{{ dehydrated_domains }}"
 
 - name: Add configuration to call hook scripts
@@ -18,10 +19,12 @@
     regexp: "^HOOK="
     line: "HOOK={{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh"
     create: true
+    mode: '0644'
   with_items: "{{ dehydrated_domains }}"
 
 - name: Ensure Domains are in domains.txt
   ansible.builtin.template:
     src: domains.txt.j2
     dest: "{{ dehydrated_config_dir }}/domains.txt"
+    mode: '0644'
   notify: dehydrated run
