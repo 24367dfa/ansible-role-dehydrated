@@ -56,10 +56,12 @@
   ansible.builtin.file:
     path: "{{ dehydrated_config_dir }}/domains.txt"
     state: touch
+    mode: '0644'
   when: not domains_txt.stat.exists
 
 - name: Ensure config is present.
   ansible.builtin.template:
     src: config.j2
     dest: "{{ dehydrated_config_dir }}/config"
+    mode: '0644'
   notify: dehydrated register
