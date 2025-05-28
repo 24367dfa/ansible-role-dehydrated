@@ -64,4 +64,4 @@
     src: config.j2
     dest: "{{ dehydrated_config_dir }}/config"
     mode: '0644'
-  notify: dehydrated register
+  notify: Dehydrated register
