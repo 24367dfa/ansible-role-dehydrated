@@ -27,4 +27,4 @@
     src: domains.txt.j2
     dest: "{{ dehydrated_config_dir }}/domains.txt"
     mode: '0644'
-  notify: dehydrated run
+  notify: Dehydrated run

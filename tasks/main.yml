@@ -1,4 +1,7 @@
 ---
-- ansible.builtin.include_tasks: install.yml
-- ansible.builtin.include_tasks: domains.yml
+- name: Include tasks for installing dehydrated
+  ansible.builtin.include_tasks: install.yml
+
+- name: Include tasks for configuring domains
+  ansible.builtin.include_tasks: domains.yml
   when: dehydrated_domains is iterable
