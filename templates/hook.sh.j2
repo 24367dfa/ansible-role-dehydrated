@@ -25,7 +25,7 @@ deploy_challenge() {
 
   # Simple example: Use nsupdate with local named
   # printf 'server 127.0.0.1\nupdate add _acme-challenge.%s 300 IN TXT "%s"\nsend\n' "${DOMAIN}" "${TOKEN_VALUE}" | nsupdate -k /var/run/named/session.key
-  {{ item.deploy_challenge_hook|default("") }}
+  {{ item.deploy_challenge_hook|default(dehydrated_common_hooks.deploy_challenge_hook|default("")) }}
 }
 
 clean_challenge() {
@@ -39,7 +39,7 @@ clean_challenge() {
 
   # Simple example: Use nsupdate with local named
   # printf 'server 127.0.0.1\nupdate delete _acme-challenge.%s TXT "%s"\nsend\n' "${DOMAIN}" "${TOKEN_VALUE}" | nsupdate -k /var/run/named/session.key
-  {{ item.clean_challenge_hook|default("") }}
+  {{ item.clean_challenge_hook|default(dehydrated_common_hooks.clean_challenge_hook|default("")) }}
 }
 
 sync_cert() {
@@ -66,7 +66,7 @@ sync_cert() {
 
   # Simple example: sync the files before symlinking them
   # sync "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" "${REQUESTFILE}"
-  {{ item.sync_cert_hook|default("") }}
+  {{ item.sync_cert_hook|default(dehydrated_common_hooks.sync_cert_hook|default("")) }}
 }
 
 deploy_cert() {
@@ -94,7 +94,7 @@ deploy_cert() {
   # Simple example: Copy file to nginx config
   # cp "${KEYFILE}" "${FULLCHAINFILE}" /etc/nginx/ssl/; chown -R nginx: /etc/nginx/ssl
   # systemctl reload nginx
-  {{ item.deploy_cert_hook|default("") }}
+  {{ item.deploy_cert_hook|default(dehydrated_common_hooks.deploy_cert_hook|default("")) }}
 }
 
 deploy_ocsp() {
@@ -116,7 +116,7 @@ deploy_ocsp() {
   # Simple example: Copy file to nginx config
   # cp "${OCSPFILE}" /etc/nginx/ssl/; chown -R nginx: /etc/nginx/ssl
   # systemctl reload nginx
-  {{ item.deploy_ocsp_hook|default("") }}
+  {{ item.deploy_ocsp_hook|default(dehydrated_common_hooks.deploy_ocsp_hook|default("")) }}
 }
 
 
@@ -138,7 +138,7 @@ unchanged_cert() {
   #   The path of the file containing the full certificate chain.
   # - CHAINFILE
   #   The path of the file containing the intermediate certificate(s).
-  {{ item.unchanged_cert_hook|default("") }}
+  {{ item.unchanged_cert_hook|default(dehydrated_common_hooks.unchanged_cert_hook|default("")) }}
 }
 
 invalid_challenge() {
@@ -156,7 +156,7 @@ invalid_challenge() {
 
   # Simple example: Send mail to root
   # printf "Subject: Validation of ${DOMAIN} failed!\n\nOh noez!" | sendmail root
-  {{ item.invalid_challenge_hook|default("") }}
+  {{ item.invalid_challenge_hook|default(dehydrated_common_hooks.invalid_challenge_hook|default("")) }}
 }
 
 request_failure() {
@@ -179,7 +179,7 @@ request_failure() {
 
   # Simple example: Send mail to root
   # printf "Subject: HTTP request failed failed!\n\nA http request failed with status ${STATUSCODE}!" | sendmail root
-  {{ item.request_failure_hook|default("") }}
+  {{ item.request_failure_hook|default(dehydrated_common_hooks.request_failure_hook|default("")) }}
 }
 
 generate_csr() {
@@ -205,13 +205,13 @@ generate_csr() {
   # if [ -e "${CERTDIR}/pre-generated.csr" ]; then
   #   cat "${CERTDIR}/pre-generated.csr"
   # fi
-  {{ item.generate_csr_hook|default("") }}
+  {{ item.generate_csr_hook|default(dehydrated_common_hooks.generate_csr_hook|default("")) }}
 }
 
 startup_hook() {
   # This hook is called before the cron command to do some initial tasks
   # (e.g. starting a webserver).
-  {{ item.startup_hook|default("") }}
+  {{ item.startup_hook|default(dehydrated_common_hooks.startup_hook|default("")) }}
   :
 }
 
@@ -224,7 +224,7 @@ exit_hook() {
   # Parameters:
   # - ERROR
   #   Contains error message if dehydrated exits with error
-  {{ item.exit_hook|default("") }}
+  {{ item.exit_hook|default(dehydrated_common_hooks.exit_hook|default("")) }}
 }
 
 HANDLER="$1"; shift

@@ -8,3 +8,4 @@ dehydrated_base_dir: "{{ dehydrated_config_dir }}"
 dehydrated_certs_dir: "{{ dehydrated_config_dir }}/certs"
 dehydrated_wellknown_dir: "{{ dehydrated_config_dir }}/challenge"
 dehydrated_domains:
+dehydrated_common_hooks:
