@@ -59,3 +59,27 @@ dehydrated_base_dir: "/var/lib/dehydrated"
 dehydrated_certs_dir: "{{ dehydrated_base_dir }}/certs"
 dehydrated_wellknown_dir: "{{ dehydrated_base_dir }}/acme-challenges"
 ```
+
+### Upgrade dehydrated with Renovate Bot
+
+Add something like this to your playbook:
+
+```yaml
+vars:
+  dehydrated_version: v0.7.1
+```
+
+Then add the following fragment to your *renovate.json* so renovate can
+update the version in your playbook.
+Adapt "managerFilePatterns" to your needs.
+
+```json
+      {
+        "customType": "regex",
+        "managerFilePatterns": [ "/\\.yml$/" ],
+        "packageNameTemplate": "dehydrated-io/dehydrated",
+        "datasourceTemplate": "github-tags",
+        "versioningTemplate": "semver",
+        "matchStrings": [ "dehydrated_version: (?<currentValue>.*?)\\s" ]
+      }
+```
