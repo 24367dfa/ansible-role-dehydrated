@@ -11,6 +11,13 @@
       - openssl
     state: present
 
+- name: Ensure debian specific dependencies are installed
+  ansible.builtin.apt:
+    pkg:
+      - bsdextrautils   # hexdump
+    state: present
+  when: ansible_distribution == "Debian"
+
 - name: Clone dehydrated repo.
   ansible.builtin.git:
     repo: 'https://github.com/dehydrated-io/dehydrated.git'
