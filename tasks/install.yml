@@ -6,9 +6,14 @@
 - name: Ensure dependencies are installed.
   ansible.builtin.package:
     name:
+      - gawk
       - git
+      - grep
+      - coreutils   # mktemp, cut, head, tail
       - curl
+      - diffutils
       - openssl
+      - sed
     state: present
 
 - name: Ensure debian specific dependencies are installed
