@@ -1,0 +1,4 @@
+HOOK={{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh
+{% if item.challenge_type is defined %}
+CHALLENGETYPE="{{ item.challenge_type }}"
+{% endif %}
