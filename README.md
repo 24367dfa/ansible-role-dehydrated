@@ -31,6 +31,7 @@ vars:
   dehydrated_force_update: True
   dehydrated_common_hooks:
     deploy_cert_hook: /usr/bin/systemctl reload nginx
+  dehydrated_challenge_type: "http-01"
   dehydrated_domains:
     - name: example.org
     - name: example.net
@@ -41,6 +42,7 @@ vars:
       deploy_cert_hook:     # empty
       deploy_challenge_hook: printf 'server 127.0.0.1\nupdate add _acme-challenge.%s 300 IN TXT "%s"\nsend\n' "${DOMAIN}" "${TOKEN_VALUE}" | nsupdate -k /var/run/named/session.key
       clean_challenge_hook: printf 'server 127.0.0.1\nupdate delete _acme-challenge.%s TXT "%s"\nsend\n' "${DOMAIN}" "${TOKEN_VALUE}" | nsupdate -k /var/run/named/session.key
+      challenge_type: "dns-01"
 
 roles:
   - role: dehydrated
