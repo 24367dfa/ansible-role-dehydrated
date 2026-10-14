@@ -4,3 +4,6 @@ DOMAINS_TXT="{{ dehydrated_config_dir }}/domains.txt"
 CERTDIR="{{ dehydrated_certs_dir }}"
 CONTACT_EMAIL="{{ dehydrated_contact_email }}"
 CHALLENGETYPE="{{ dehydrated_challenge_type }}"
+{% if dehydrated_renew_days != none %}
+RENEW_DAYS="{{ dehydrated_renew_days }}"
+{% endif %}

@@ -2,3 +2,6 @@ HOOK={{ dehydrated_certs_dir }}/{{ item.name }}/hook.sh
 {% if item.challenge_type is defined %}
 CHALLENGETYPE="{{ item.challenge_type }}"
 {% endif %}
+{% if item.renew_days is defined and item.renew_days != none %}
+RENEW_DAYS="{{ item.renew_days }}"
+{% endif %}
